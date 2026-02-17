@@ -1,93 +1,130 @@
-# Heart Disease Classification – ML Deployment Project
+# Heart Disease Classification – ML Deployment (Capstone)
 
-This project is developed as part of a Capstone / Machine Learning Deployment assignment.
+This project deploys a trained Machine Learning pipeline for heart disease risk classification as a REST API.
+It includes data preprocessing, model training, inference API (FastAPI), Docker containerization, and deployment on Google Cloud Run.
 
-The goal is to build, evaluate, and deploy a machine learning model that predicts the presence of heart disease based on patient clinical features.
-The final solution is exposed as a REST API and deployed on a cloud platform using Docker.
+## 1) Project Structure
 
----
-
-## Project Overview
-
-Heart disease is one of the leading causes of death worldwide.
-In this project, machine learning techniques are used to classify whether a patient is likely to have heart disease based on structured medical data.
-
-The project follows an end-to-end machine learning workflow:
-- Dataset exploration and analysis
-- Model training and evaluation
-- Model selection
-- Pipeline creation
-- Model deployment as an API
-
----
-
-## Machine Learning Models
-
-Two classification models are trained and compared:
-
-- Random Forest Classifier
-- Multi-Layer Perceptron (MLP)
-
-Model performance is evaluated using appropriate classification metrics, and the best-performing model is selected for deployment.
-
----
-
-## Project Structure
-
+```
 .
-├─ notebooks/
-│   └─ heart_disease_eda_training.ipynb
-│
-├─ src/
-│   ├─ api/
-│   ├─ model/
-│   └─ utils/
-│
 ├─ artifacts/
-│   └─ models/
-│
-├─ docker/
-│
-├─ requirements.txt
-├─ README.md
-└─ .gitignore
+│  ├─ models/
+│  │  ├─ heart_disease_pipeline.joblib
+│  │  └─ metadata.json
+│  └─ sample_payload.json
+├─ data/
+│  ├─ raw/
+│  │  └─ heart.csv
+│  └─ processed/
+│     └─ heart_clean.csv
+├─ src/
+│  ├─ api/
+│  │  ├─ main.py
+│  │  ├─ schemas.py
+│  │  └─ security.py
+│  ├─ data/
+│  │  └─ make_dataset.py
+│  └─ model/
+│     └─ train_pipeline.py
+├─ Dockerfile
+├─ .dockerignore
+└─ requirements.txt
+```
 
----
+## 2) Requirements
 
-## Deployment Workflow
+- Python 3.11 recommended
+- Conda (optional, for local environment)
+- Docker Desktop
+- Deployed Docker image on Google Cloud Run
 
-1. Train and evaluate machine learning models
-2. Select the best-performing model
-3. Create a preprocessing + model pipeline
-4. Save the trained pipeline as an artifact
-5. Build a REST API using FastAPI
-6. Dockerize the application
-7. Deploy the container to a cloud platform
-8. Expose a public API endpoint for inference
+## 3) Local Setup (Conda)
 
----
+### 3.1 Create and activate environment
+```powershell
+conda create -n mlhub python=3.11 -y
+conda activate mlhub
+pip install -r requirements.txt
+```
 
-## API Description (Planned)
+### 3.2 Run the API locally
+Set an API key (PowerShell):
+```powershell
+$env:API_KEY="devkey123"
+```
 
-- Endpoint: /predict
-- Method: POST
-- Input: JSON containing patient clinical features
-- Output: Prediction indicating presence or absence of heart disease, along with confidence score
+Run the server:
+```powershell
+python -m uvicorn src.api.main:app --host 127.0.0.1 --port 8000
+```
 
----
+Open:
+- Health: http://127.0.0.1:8000/health
+- Swagger UI: http://127.0.0.1:8000/docs
 
-## Technologies Used
+## 4) Using the API
 
-- Python
-- Scikit-learn
-- Pandas & NumPy
-- FastAPI
-- Docker
-- Cloud Platform (AWS / GCP / Azure)
+### 4.1 Health check
+```powershell
+Invoke-WebRequest -Uri "http://127.0.0.1:8000/health" | Select-Object -ExpandProperty Content
+```
 
----
+### 4.2 Prediction endpoint
+The `/predict` endpoint expects JSON input:
 
-## Notes
+```json
+{
+  "features": {
+    "age": 54,
+    "sex": 1
+  }
+}
+```
 
-- The model is loaded once at application startup and is not retrained during inference.
-- The focus of this project is on real-world deployment rather than model accuracy alone.
+Example:
+```powershell
+$headers = @{
+  "Content-Type" = "application/json"
+  "X-API-Key" = "devkey123"
+}
+$body = Get-Content -Raw "artifacts\sample_payload.json"
+
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/predict" -Method Post -Headers $headers -Body $body
+```
+
+## 5) Docker
+
+### 5.1 Build image
+```powershell
+docker build -t heart-api:0.2 .
+```
+
+### 5.2 Run container
+```powershell
+docker run --rm -p 8000:8000 -e API_KEY="devkey123" heart-api:0.2
+```
+
+## 6) Cloud Deployment (GCP Cloud Run)
+
+- Container port: 8000
+- Environment variable: API_KEY
+
+Test:
+```
+https://YOUR_CLOUD_RUN_URL/health
+```
+
+## 7) Reproducibility Note
+
+Dependencies are pinned in requirements.txt to avoid scikit-learn version mismatch issues during deployment.
+
+## 8) Model Training (Optional)
+
+```powershell
+python src/data/make_dataset.py
+python src/model/train_pipeline.py
+```
+
+## 9) Academic Use
+
+This repository is submitted as part of a capstone project for academic purposes.
