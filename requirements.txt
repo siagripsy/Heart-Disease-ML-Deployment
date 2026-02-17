@@ -1,13 +1,10 @@
-numpy
-pandas
-scikit-learn
-matplotlib
-seaborn
-joblib
+numpy==2.4.2
+pandas==3.0.0
+scikit-learn==1.7.1
 
-fastapi
-uvicorn
+joblib==1.5.3
 
+fastapi==0.129.0
 
-kaggle
-kagglehub
+uvicorn[standard]==0.40.0
+

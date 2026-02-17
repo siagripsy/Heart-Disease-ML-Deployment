@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+.vscode/
+.ipynb_checkpoints/
+data/raw/
+data/processed/
+artifacts/sample_payload.json
+tests/

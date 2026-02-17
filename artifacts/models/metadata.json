@@ -1,0 +1,93 @@
+{
+  "best_model": "mlp",
+  "selection_metric": "recall_class_1",
+  "best_recall_class_1": 0.7769344296858528,
+  "best_roc_auc": 0.8154307408973823,
+  "features": [
+    "HighBP",
+    "HighChol",
+    "CholCheck",
+    "BMI",
+    "Smoker",
+    "Stroke",
+    "Diabetes",
+    "PhysActivity",
+    "Fruits",
+    "Veggies",
+    "HvyAlcoholConsump",
+    "AnyHealthcare",
+    "NoDocbcCost",
+    "GenHlth",
+    "MentHlth",
+    "PhysHlth",
+    "DiffWalk",
+    "Sex",
+    "Age",
+    "Education",
+    "Income"
+  ],
+  "metrics": {
+    "random_forest": {
+      "recall_class_1": 0.09297912713472485,
+      "roc_auc": 0.809545027475777,
+      "report": {
+        "0": {
+          "precision": 0.904133704735376,
+          "recall": 0.9844470325617508,
+          "f1-score": 0.9425826760677903,
+          "support": 41214.0
+        },
+        "1": {
+          "precision": 0.4075785582255083,
+          "recall": 0.09297912713472485,
+          "f1-score": 0.15141630901287553,
+          "support": 4743.0
+        },
+        "accuracy": 0.8924429357878016,
+        "macro avg": {
+          "precision": 0.6558561314804422,
+          "recall": 0.5387130798482378,
+          "f1-score": 0.546999492540333,
+          "support": 45957.0
+        },
+        "weighted avg": {
+          "precision": 0.852886646400491,
+          "recall": 0.8924429357878016,
+          "f1-score": 0.860930216617838,
+          "support": 45957.0
+        }
+      }
+    },
+    "mlp": {
+      "recall_class_1": 0.7769344296858528,
+      "roc_auc": 0.8154307408973823,
+      "report": {
+        "0": {
+          "precision": 0.9651526629557656,
+          "recall": 0.7109962634056388,
+          "f1-score": 0.8188054488298987,
+          "support": 41214.0
+        },
+        "1": {
+          "precision": 0.2362785329571685,
+          "recall": 0.7769344296858528,
+          "f1-score": 0.3623580313683072,
+          "support": 4743.0
+        },
+        "accuracy": 0.717801423069391,
+        "macro avg": {
+          "precision": 0.6007155979564671,
+          "recall": 0.7439653465457459,
+          "f1-score": 0.5905817400991029,
+          "support": 45957.0
+        },
+        "weighted avg": {
+          "precision": 0.889929084424022,
+          "recall": 0.717801423069391,
+          "f1-score": 0.7716977154917711,
+          "support": 45957.0
+        }
+      }
+    }
+  }
+}

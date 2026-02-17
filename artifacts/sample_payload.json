@@ -1,0 +1,25 @@
+{
+  "features": {
+    "HighBP": 1.0,
+    "HighChol": 1.0,
+    "CholCheck": 1.0,
+    "BMI": 40.0,
+    "Smoker": 1.0,
+    "Stroke": 0.0,
+    "Diabetes": 0.0,
+    "PhysActivity": 0.0,
+    "Fruits": 0.0,
+    "Veggies": 1.0,
+    "HvyAlcoholConsump": 0.0,
+    "AnyHealthcare": 1.0,
+    "NoDocbcCost": 0.0,
+    "GenHlth": 5.0,
+    "MentHlth": 18.0,
+    "PhysHlth": 15.0,
+    "DiffWalk": 1.0,
+    "Sex": 0.0,
+    "Age": 9.0,
+    "Education": 4.0,
+    "Income": 3.0
+  }
+}
