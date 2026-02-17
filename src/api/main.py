@@ -69,7 +69,7 @@ def predict(req: PredictRequest) -> PredictResponse:
             prediction=pred,
             probability_class_1=p1,
             model_version=model_version,
-            notes="Threshold is 0.5 by default",
+            notes="Threshold is set to 0.5 - prob > 0.5 -> prediction = 1 , else prediction = 0",
         )
 
     except Exception as e:

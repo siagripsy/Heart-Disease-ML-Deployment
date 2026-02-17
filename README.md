@@ -75,8 +75,27 @@ The `/predict` endpoint expects JSON input:
 ```json
 {
   "features": {
-    "age": 54,
-    "sex": 1
+    "HighBP": 1.0,
+    "HighChol": 1.0,
+    "CholCheck": 1.0,
+    "BMI": 40.0,
+    "Smoker": 1.0,
+    "Stroke": 0.0,
+    "Diabetes": 0.0,
+    "PhysActivity": 0.0,
+    "Fruits": 0.0,
+    "Veggies": 1.0,
+    "HvyAlcoholConsump": 0.0,
+    "AnyHealthcare": 1.0,
+    "NoDocbcCost": 0.0,
+    "GenHlth": 5.0,
+    "MentHlth": 18.0,
+    "PhysHlth": 15.0,
+    "DiffWalk": 1.0,
+    "Sex": 0.0,
+    "Age": 9.0,
+    "Education": 4.0,
+    "Income": 3.0
   }
 }
 ```
@@ -111,7 +130,7 @@ docker run --rm -p 8000:8000 -e API_KEY="devkey123" heart-api:0.2
 
 Test:
 ```
-https://YOUR_CLOUD_RUN_URL/health
+https://https://heart-disease-api-800105443947.us-central1.run.app/health
 ```
 
 ## 7) Reproducibility Note
